@@ -42,16 +42,7 @@ function scrub(e) {
 
 function handleFullscreen(){
     console.log("I'm clicked");
-    let isFullscreen = false;
-    if (isFullscreen === false) {
-        // make fullscreen
-        player.clientHeight = window.innerHeight;
-        player.clientWidth = window.innerWidth;
-        isFullscreen = !isFullscreen; 
-    } else {
-        // make regular size
-        isFullscreen = !isFullscreen;
-    }
+    player.webkitRequestFullScreen();
 }
 
 /* Hook up the event listeners */
