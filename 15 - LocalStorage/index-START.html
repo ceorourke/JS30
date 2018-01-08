@@ -69,7 +69,7 @@
   function removeItems(e) {
     e.preventDefault();
     console.log('im doing something');
-    window.localStorage.clear(); // remove all items from localStorage
+    localStorage.clear(); // remove all items from localStorage
     location.reload(); // this works but isn't ideal, want to repopulate the list
     populateList(items, itemsList); // not sure why this isn't repopulating
     localStorage.setItem('items', JSON.stringify(items));
