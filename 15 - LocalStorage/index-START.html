@@ -21,16 +21,10 @@
     </ul>
     <form class="add-items">
       <input type="text" name="item" placeholder="Item Name" required>
-      <input type="submit" value="+ Add Item">
-    </form> </br>
-    <form class="clear-items">
-      <input type="submit" value="Clear Items">
-    </form>
-    <form class="check-all">
-      <input type="submit" value="Check All">
-    </form>
-    <form class="uncheck-all">
-      <input type="submit" value="Uncheck All">
+      <input type="submit" value="+ Add Item"></br></br>
+      <input type="submit" name="clear-items" value="Clear Items">
+      <input type="submit" name="check-all" value="Check All">
+      <input type="submit" name="uncheck-all" value="Uncheck All">
     </form>
   </div>
 
@@ -39,9 +33,9 @@
   const itemsList = document.querySelector('.plates');
   const items =  JSON.parse(localStorage.getItem('items')) || [];
 
-  const clearItems = document.querySelector('.clear-items');
-  const checkItems = document.querySelector('.check-all');
-  const uncheckItems = document.querySelector('.uncheck-all');
+  const clearItems = document.querySelector('[name=clear-items]');
+  const checkItems = document.querySelector('[name=check-all]');
+  const uncheckItems = document.querySelector('[name=uncheck-all]');
 
 
   function addItem(e) {
@@ -74,11 +68,12 @@
 
   function removeItems(e) {
     e.preventDefault();
-    localStorage.clear(); // remove all items from localStorage
-    // location.reload(); // this works but isn't ideal, want to repopulate the list
+    console.log('im doing something');
+    window.localStorage.clear(); // remove all items from localStorage
+    location.reload(); // this works but isn't ideal, want to repopulate the list
     populateList(items, itemsList); // not sure why this isn't repopulating
     localStorage.setItem('items', JSON.stringify(items));
-    this.reset();
+    // this.reset();
   }
 
   function checkAllItems(e) {
@@ -86,13 +81,15 @@
     items.forEach(item => item.done = true);
     populateList(items, itemsList);
     localStorage.setItem('items', JSON.stringify(items));
-    this.reset();
+    // this.reset();
   }
 
   function uncheckAllItems(e) {
     e.preventDefault();
     items.forEach(item => item.done = false);
     populateList(items, itemsList);
+    localStorage.setItem('items', JSON.stringify(items));
+    // this.reset();
   }
 
   function toggleDone(e) {
@@ -106,9 +103,11 @@
 
   addItems.addEventListener('submit', addItem);
   itemsList.addEventListener('click', toggleDone);
+  // below are 3 new functions added 
   clearItems.addEventListener('click', removeItems);
   checkItems.addEventListener('click', checkAllItems);
   uncheckItems.addEventListener('click', uncheckAllItems);
+
   populateList(items, itemsList);
 </script>
 
